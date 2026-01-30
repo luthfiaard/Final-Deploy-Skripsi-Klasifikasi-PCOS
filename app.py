@@ -145,8 +145,7 @@ if pred_btn:
                     border-left: 6px solid #FF4500;
                     margin-top: 16px;">
                     🧾 <strong>Rekomendasi Sistem:</strong><br>
-                    Disarankan melakukan <strong>konsultasi ke dokter spesialis kandungan</strong>
-                    untuk pemeriksaan lebih lanjut.
+                    Sistem menyarankan untuk melakukan **konsultasi ke dokter spesialis kandungan** untuk pemeriksaan lebih lanjut.
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -167,7 +166,7 @@ if pred_btn:
                     border-left: 6px solid #1E90FF;
                     margin-top: 16px;">
                     🧾 <strong>Rekomendasi Sistem:</strong><br>
-                    Tetap jaga pola hidup sehat dan lakukan pemeriksaan rutin.
+                    Tetap jaga pola hidup sehat dan lakukan pemeriksaan rutin. Segera konsultasi ke dokter apabila muncul keluhan lain.
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -200,5 +199,6 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
