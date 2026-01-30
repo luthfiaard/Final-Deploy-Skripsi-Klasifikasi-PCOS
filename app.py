@@ -40,6 +40,9 @@ feature_info = {
 user_input = {}
 st.markdown("### 🧾 Form Input Data")
 
+with st.form("form_input_pcos", clear_on_submit=False):
+    user_input = {}
+
 for feature in selected_features:
     if feature in feature_info:
         st.markdown(
@@ -85,9 +88,9 @@ for feature in selected_features:
 # === Tombol aksi ===
 col1, col2, col3 = st.columns([1, 1, 2])
 with col1:
-    pred_btn = st.button("🔍 Prediksi")
+    pred_btn = st.form_submit_button("🔍 Prediksi")
 with col2:
-    reset_btn = st.button("🔁 Reset Form Input")
+    reset_btn = st.form_submit_button("🔁 Reset Form Input")
 with col3:
     history_btn = st.button("📊 Lihat Riwayat Prediksi (jika ada)")
 
@@ -199,6 +202,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
