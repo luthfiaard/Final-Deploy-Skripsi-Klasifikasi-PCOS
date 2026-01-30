@@ -93,9 +93,7 @@ with col3:
 
 # === Reset Form ===
 if reset_btn:
-    for feature in selected_features:
-        if feature in st.session_state:
-            del st.session_state[feature]
+    st.session_state.clear()
     st.rerun()
 
 # === Jika tombol prediksi ditekan ===
@@ -199,6 +197,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
