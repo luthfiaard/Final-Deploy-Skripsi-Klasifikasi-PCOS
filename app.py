@@ -132,10 +132,10 @@ if pred_btn:
             st.markdown(
                 """
                 <div style="
-                    background-color: #FFD5F2;
+                    background-color: #FF7E9A;
                     padding: 16px;
                     border-radius: 10px;
-                    border-left: 6px solid #FFD8DF;
+                    border-left: 6px solid #FFE7EC;
                     margin-top: 16px;">
                     🧾 <strong>Rekomendasi Sistem:</strong><br>
                     Sistem menyarankan untuk melakukan konsultasi ke dokter spesialis kandungan untuk pemeriksaan lebih lanjut.
@@ -178,7 +178,7 @@ if pred_btn:
         st.subheader("📊 Visualisasi Probabilitas")
         fig, ax = plt.subplots()
         labels = ["Tidak PCOS", "PCOS"]
-        colors = ["#00F7FF", "#FF7DB0"]
+        colors = ["#D1F6FF", "#FFC6D2"]
         ax.bar(labels, probabilities, color=colors)
         ax.set_ylabel("Probabilitas")
         ax.set_ylim(0, 1)
@@ -194,6 +194,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
