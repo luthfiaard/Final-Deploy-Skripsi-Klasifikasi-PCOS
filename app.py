@@ -40,59 +40,43 @@ feature_info = {
 user_input = {}
 st.markdown("### 🧾 Form Input Data")
 
-with st.form("form_input_pcos", clear_on_submit=False):
+with st.form("form_input_pcos"):
     user_input = {}
 
-for feature in selected_features:
-    if feature in feature_info:
-        st.markdown(
-            f"**{feature}**  \nℹ️ {feature_info[feature]['desc']} — {feature_info[feature]['range']}"
-        )
+    for feature in selected_features:
+        if feature in feature_info:
+            st.markdown(
+                f"**{feature}**  \nℹ️ {feature_info[feature]['desc']} — {feature_info[feature]['range']}"
+            )
 
-    if feature in ["Skin darkening (Y/N)", "Weight gain(Y/N)", "hair growth(Y/N)"]:
-        pilihan = st.selectbox(
-            feature,
-            ["Pilih...", "Tidak (0)", "Ya (1)"],
-            label_visibility="collapsed",
-            key=feature
-        )
-        if pilihan == "Pilih...":
-            user_input[feature] = None
+        if feature in ["Skin darkening (Y/N)", "Weight gain(Y/N)", "hair growth(Y/N)"]:
+            pilihan = st.selectbox(
+                feature,
+                ["Pilih...", "Tidak (0)", "Ya (1)"],
+                key=feature
+            )
+            user_input[feature] = None if pilihan == "Pilih..." else (1.0 if "Ya" in pilihan else 0.0)
+
+        elif feature == "Cycle(R/I)":
+            pilihan = st.selectbox(
+                feature,
+                ["Pilih...", "Regular = Teratur (2)", "Irregular = Tidak Teratur (4)"],
+                key=feature
+            )
+            user_input[feature] = None if pilihan == "Pilih..." else (4.0 if "Irregular" in pilihan else 2.0)
+
         else:
-            user_input[feature] = 1.0 if "Ya" in pilihan else 0.0
+            val = st.text_input(feature, "", key=feature)
+            user_input[feature] = None if val.strip() == "" else float(val.replace(",", "."))
 
-    elif feature == "Cycle(R/I)":
-        pilihan = st.selectbox(
-            feature,
-            ["Pilih...", "Regular = Teratur (2)", "Irregular = Tidak Teratur (4)"],
-            label_visibility="collapsed",
-            key=feature
-        )
-        if pilihan == "Pilih...":
-            user_input[feature] = None
-        else:
-            user_input[feature] = 4.0 if "Irregular" in pilihan else 2.0
-
-    else:
-        val = st.text_input(feature, "", label_visibility="collapsed", key=feature)
-        if val.strip() == "":
-            user_input[feature] = None
-        else:
-            try:
-                val = val.replace(",", ".")
-                user_input[feature] = float(val)
-            except ValueError:
-                st.error(f"Input {feature} harus berupa angka!")
-                user_input[feature] = None
-
-# === Tombol aksi ===
-col1, col2, col3 = st.columns([1, 1, 2])
-with col1:
-    pred_btn = st.form_submit_button("🔍 Prediksi")
-with col2:
-    reset_btn = st.form_submit_button("🔁 Reset Form Input")
-with col3:
-    history_btn = st.button("📊 Lihat Riwayat Prediksi (jika ada)")
+    # Tombol Aksi
+    col1, col2 = st.columns(2)
+    with col1:
+        pred_btn = st.form_submit_button("🔍 Prediksi")
+    with col2:
+        reset_btn = st.form_submit_button("🔁 Reset Form Input")
+    with col3:
+        history_btn = st.button("📊 Lihat Riwayat Prediksi (jika ada)")
 
 # === Reset Form ===
 if reset_btn:
@@ -202,6 +186,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
