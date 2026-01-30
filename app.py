@@ -80,9 +80,10 @@ with st.form("form_input_pcos"):
 
 # === Reset Form ===
 if reset_btn:
-    history = st.session_state.get("history", [])
-    st.session_state.clear()
-    st.session_state.history = history
+if reset_btn:
+    for f in selected_features:
+        if f in st.session_state:
+            del st.session_state[f]
     st.rerun()
 
 # === Jika tombol prediksi ditekan ===
@@ -186,6 +187,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
