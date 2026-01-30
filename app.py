@@ -70,7 +70,7 @@ with st.form("form_input_pcos"):
             user_input[feature] = None if val.strip() == "" else float(val.replace(",", "."))
 
     # Tombol Aksi
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     with col1:
         pred_btn = st.form_submit_button("🔍 Prediksi")
     with col2:
@@ -186,6 +186,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
