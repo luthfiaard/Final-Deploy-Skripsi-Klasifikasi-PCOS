@@ -153,10 +153,10 @@ if pred_btn:
             st.markdown(
                 """
                 <div style="
-                    background-color: rgba(30, 144, 255, 0.15);
+                    background-color: #ECFCFF;
                     padding: 16px;
                     border-radius: 10px;
-                    border-left: 6px solid #1E90FF;
+                    border-left: 6px solid #72E4F9;
                     margin-top: 16px;">
                     🧾 <strong>Rekomendasi Sistem:</strong><br>
                     Tetap jaga pola hidup sehat dan lakukan pemeriksaan rutin. Segera konsultasi ke dokter apabila muncul keluhan lain.
@@ -194,6 +194,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
