@@ -135,7 +135,7 @@ if pred_btn:
                     background-color: #FFEAEF;
                     padding: 16px;
                     border-radius: 10px;
-                    border-left: 6px solid #FCCD5;
+                    border-left: 6px solid #FF7497;
                     margin-top: 16px;">
                     🧾 <strong>Rekomendasi Sistem:</strong><br>
                     Sistem menyarankan untuk melakukan konsultasi ke dokter spesialis kandungan untuk pemeriksaan lebih lanjut.
@@ -194,6 +194,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
