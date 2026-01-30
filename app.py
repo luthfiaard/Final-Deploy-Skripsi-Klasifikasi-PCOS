@@ -135,9 +135,21 @@ if pred_btn:
                 f"<h3 style='text-align: center;'>Probabilitas: {probabilities[1]:.2%}</h3>",
                 unsafe_allow_html=True
             )
-            rekomendasi = (
-                "Sistem menyarankan untuk melakukan **konsultasi ke dokter spesialis kandungan** "
-                "untuk pemeriksaan lebih lanjut."
+            st.markdown(
+            f"""
+            <div style="
+                background-color: rgba(255, 69, 0, 0.15);
+                padding: 16px 20px;
+                border-radius: 10px;
+                border-left: 6px solid #FF4500;
+                margin-top: 16px;
+            ">
+                🧾 <strong>Rekomendasi Sistem:</strong><br>
+                Sistem menyarankan untuk melakukan <strong>konsultasi ke dokter spesialis kandungan</strong>
+                untuk pemeriksaan lebih lanjut.
+            </div>
+            """,
+            unsafe_allow_html=True
             )
         else:
             st.markdown(
@@ -145,11 +157,22 @@ if pred_btn:
                 f"<h3 style='text-align: center;'>Probabilitas: {probabilities[0]:.2%}</h3>",
                 unsafe_allow_html=True
             )
-            rekomendasi = (
-                "Tetap jaga pola hidup sehat dan lakukan pemeriksaan rutin. "
-                "Segera konsultasi ke dokter apabila muncul keluhan lain."
+            st.markdown(
+            f"""
+            <div style="
+                background-color: rgba(30, 144, 255, 0.15);
+                padding: 16px 20px;
+                border-radius: 10px;
+                border-left: 6px solid #1E90FF;
+                margin-top: 16px;
+            ">
+                🧾 <strong>Rekomendasi Sistem:</strong><br>
+                Tetap jaga pola hidup sehat dan lakukan pemeriksaan rutin.
+                Segera konsultasi ke dokter apabila muncul keluhan lain.
+            </div>
+            """,
+            unsafe_allow_html=True
             )
-
         st.info(f"🧾 **Rekomendasi Sistem:** {rekomendasi}")
         st.caption("⚠️ *Catatan: Sistem ini hanya berfungsi sebagai alat bantu prediksi, bukan diagnosis medis.*")
 
@@ -179,3 +202,4 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
