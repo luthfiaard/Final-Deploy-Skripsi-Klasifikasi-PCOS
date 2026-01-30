@@ -177,13 +177,14 @@ if pred_btn:
         # === Visualisasi probabilitas ===
         st.subheader("📊 Visualisasi Probabilitas")
         fig, ax = plt.subplots()
-        colors = ["blue", "red"]
-        ax.bar(["Tidak PCOS", "PCOS"], probabilities)
+        labels = ["Tidak PCOS", "PCOS"]
+        colors = ["#1f77b4", "#d62728"]
+        ax.bar(labels, probabilities, color=colors)
         ax.set_ylabel("Probabilitas")
         ax.set_ylim(0, 1)
         for i, v in enumerate(probabilities):
             ax.text(i, v + 0.02, f"{v:.2%}", ha="center", fontsize=10)
-        st.pyplot(fig)
+        st.pyplot(fig, clear_figure=True)
 
 # === Tampilkan riwayat prediksi ===
 if history_btn:
@@ -193,6 +194,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
