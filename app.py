@@ -130,46 +130,25 @@ if pred_btn:
         # === Hasil prediksi ===
         st.markdown("---")
         if prediction == 1:
-        f"""
-        <div style="
-            background-color: rgba(255, 69, 0, 0.12);
-            padding: 15px 20px;
-            border-left: 6px solid #FF4500;
-            border-radius: 8px;
-            margin-top: 15px;
-        ">
-            🧾 <strong>Rekomendasi Sistem:</strong><br>
-            Sistem menyarankan untuk melakukan <strong>konsultasi ke dokter spesialis kandungan</strong>
-            untuk pemeriksaan lebih lanjut.
-        </div>
-        """,
-        unsafe_allow_html=True
-        )            
-        rekomendasi = (
+            st.markdown(
+                f"<h2 style='text-align: center; color: #FF4500;'>⚠️ Hasil Prediksi: PCOS</h2>"
+                f"<h3 style='text-align: center;'>Probabilitas: {probabilities[1]:.2%}</h3>",
+                unsafe_allow_html=True
+            )
+            rekomendasi = (
                 "Sistem menyarankan untuk melakukan **konsultasi ke dokter spesialis kandungan** "
                 "untuk pemeriksaan lebih lanjut."
             )
         else:
             st.markdown(
-        f"""
-        <div style="
-            background-color: rgba(30, 144, 255, 0.12);
-            padding: 15px 20px;
-            border-left: 6px solid #1E90FF;
-            border-radius: 8px;
-            margin-top: 15px;
-        ">
-            🧾 <strong>Rekomendasi Sistem:</strong><br>
-            Tetap jaga pola hidup sehat dan lakukan pemeriksaan rutin.
-            Segera konsultasi ke dokter apabila muncul keluhan lain.
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
-        rekomendasi = (
+                f"<h2 style='text-align: center; color: #ADFF2F;'>💡 Hasil Prediksi: Tidak PCOS</h2>"
+                f"<h3 style='text-align: center;'>Probabilitas: {probabilities[0]:.2%}</h3>",
+                unsafe_allow_html=True
+            )
+            rekomendasi = (
                 "Tetap jaga pola hidup sehat dan lakukan pemeriksaan rutin. "
                 "Segera konsultasi ke dokter apabila muncul keluhan lain."
-        )
+            )
 
         st.info(f"🧾 **Rekomendasi Sistem:** {rekomendasi}")
         st.caption("⚠️ *Catatan: Sistem ini hanya berfungsi sebagai alat bantu prediksi, bukan diagnosis medis.*")
@@ -200,4 +179,3 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
-
