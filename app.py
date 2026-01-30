@@ -86,9 +86,16 @@ with col3:
 
 # === Reset Form ===
 if reset_btn:
-    for f in selected_features:
-        if f in st.session_state:
-            del st.session_state[f]
+    for feature in selected_features:
+        if feature in [
+            "Skin darkening (Y/N)",
+            "Weight gain(Y/N)",
+            "hair growth(Y/N)",
+            "Cycle(R/I)"
+        ]:
+            st.session_state[feature] = "Pilih..."
+        else:
+            st.session_state[feature] = ""
     st.rerun()
 
 # === Jika tombol prediksi ditekan ===
@@ -192,6 +199,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
