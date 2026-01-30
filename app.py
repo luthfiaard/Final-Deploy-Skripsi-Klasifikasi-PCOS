@@ -132,7 +132,7 @@ if pred_btn:
             st.markdown(
                 """
                 <div style="
-                    background-color: rgba(255, 69, 0, 0.15);
+                    background-color: #FFD8DF;
                     padding: 16px;
                     border-radius: 10px;
                     border-left: 6px solid #FF4500;
@@ -178,7 +178,7 @@ if pred_btn:
         st.subheader("📊 Visualisasi Probabilitas")
         fig, ax = plt.subplots()
         labels = ["Tidak PCOS", "PCOS"]
-        colors = ["#4C72B0", "#C44E52"]
+        colors = ["#B0FFFA", "#FF7DB0"]
         ax.bar(labels, probabilities, color=colors)
         ax.set_ylabel("Probabilitas")
         ax.set_ylim(0, 1)
@@ -194,6 +194,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
