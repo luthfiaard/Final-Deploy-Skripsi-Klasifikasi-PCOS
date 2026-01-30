@@ -87,23 +87,9 @@ with col3:
 # === Reset Form ===
 if reset_btn:
     for feature in selected_features:
-        # Selectbox Y/N
-        if feature in [
-            "Skin darkening (Y/N)",
-            "Weight gain(Y/N)",
-            "hair growth(Y/N)"
-        ]:
-            st.session_state[feature] = "Pilih..."
-
-        # Selectbox Cycle
-        elif feature == "Cycle(R/I)":
-            st.session_state[feature] = "Pilih..."
-
-        # Text input
-        else:
-            st.session_state[feature] = ""
-
-    st.rerun()
+        if feature in
+            del st.session_state[feature]
+        st.rerun()
 
 # === Jika tombol prediksi ditekan ===
 if pred_btn:
