@@ -132,10 +132,10 @@ if pred_btn:
             st.markdown(
                 """
                 <div style="
-                    background-color: #FFD8DF;
+                    background-color: #FFD5F2;
                     padding: 16px;
                     border-radius: 10px;
-                    border-left: 6px solid #FF4500;
+                    border-left: 6px solid #FFD8DF;
                     margin-top: 16px;">
                     🧾 <strong>Rekomendasi Sistem:</strong><br>
                     Sistem menyarankan untuk melakukan konsultasi ke dokter spesialis kandungan untuk pemeriksaan lebih lanjut.
@@ -194,6 +194,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
