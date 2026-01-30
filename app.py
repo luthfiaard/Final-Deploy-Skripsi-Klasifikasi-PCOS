@@ -62,7 +62,7 @@ for feature in selected_features:
             label_visibility="collapsed",
             key=feature
         )
-            user_input[feature] = None if pilihan == "Pilih..." else (4.0 if "Irregular" in pilihan else 2.0)
+        user_input[feature] = None if pilihan == "Pilih..." else (4.0 if "Irregular" in pilihan else 2.0)
 
     else:
         val = st.text_input(feature, "", label_visibility="collapsed", key=feature)
@@ -193,6 +193,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
