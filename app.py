@@ -80,22 +80,29 @@ col1, col2, col3 = st.columns([1, 1, 2])
 with col1:
     pred_btn = st.button("🔍 Prediksi")
 with col2:
-    reset_btn = st.button("🔁 Reset")
+    reset_btn = st.button("🔁 Reset Form Input")
 with col3:
-    history_btn = st.button("📊 Riwayat")
+    history_btn = st.button("📊 Lihat Riwayat Prediksi (jika ada)")
 
 # === Reset Form ===
 if reset_btn:
     for feature in selected_features:
+        # Selectbox Y/N
         if feature in [
             "Skin darkening (Y/N)",
             "Weight gain(Y/N)",
-            "hair growth(Y/N)",
-            "Cycle(R/I)"
+            "hair growth(Y/N)"
         ]:
             st.session_state[feature] = "Pilih..."
+
+        # Selectbox Cycle
+        elif feature == "Cycle(R/I)":
+            st.session_state[feature] = "Pilih..."
+
+        # Text input
         else:
             st.session_state[feature] = ""
+
     st.rerun()
 
 # === Jika tombol prediksi ditekan ===
@@ -199,6 +206,7 @@ if history_btn:
         st.dataframe(hist_df, use_container_width=True)
     else:
         st.info("Belum ada riwayat prediksi yang tersimpan.")
+
 
 
 
