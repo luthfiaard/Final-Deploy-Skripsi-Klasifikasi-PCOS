@@ -1,3 +1,6 @@
+import gspread
+from google.oauth2.service_account import Credentials
+from datetime import datetime
 import streamlit as st
 import pickle
 import pandas as pd
@@ -9,6 +12,22 @@ with open("finalmodel_terbaru_klasifikasiPCOS.sav", "rb") as f:
 
 model = bundle["model"]
 selected_features = bundle["features"]
+
+# === Koneksi Google Sheet ===
+scope = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
+
+credentials = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=scope
+)
+
+gc = gspread.authorize(credentials)
+
+# Ganti dengan NAMA Google Sheet kamu
+sheet = gc.open("Riwayat_Prediksi_PCOS").sheet1
 
 # Hilangkan kemungkinan fitur duplikat (aman, tidak mengubah logika)
 selected_features = list(dict.fromkeys(selected_features))
@@ -167,12 +186,22 @@ if pred_btn:
         st.caption("⚠️ *Catatan: Sistem ini hanya berfungsi sebagai alat bantu prediksi, bukan diagnosis medis.*")
 
         # === Simpan ke riwayat ===
-        st.session_state.history.append({
-            "Prediksi": "PCOS" if prediction == 1 else "Tidak PCOS",
-            "Probabilitas_PCOS": f"{probabilities[1]:.2%}",
-            "Probabilitas_Tidak_PCOS": f"{probabilities[0]:.2%}",
-            **user_input
-        })
+        # === Simpan ke Google Sheet (Excel) ===
+row_data = [
+    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+]
+
+# urut sesuai selected_features
+for feature in selected_features:
+    row_data.append(user_input[feature])
+
+row_data.extend([
+    "PCOS" if prediction == 1 else "Tidak PCOS",
+    round(probabilities[1], 3),
+    round(probabilities[0], 3)
+])
+
+sheet.append_row(row_data)
 
         # === Visualisasi probabilitas ===
         st.subheader("📊 Visualisasi Probabilitas")
@@ -188,12 +217,15 @@ if pred_btn:
 
 # === Tampilkan riwayat prediksi ===
 if history_btn:
-    if len(st.session_state.history) > 0:
-        st.subheader("📜 Riwayat Prediksi")
-        hist_df = pd.DataFrame(st.session_state.history)
-        st.dataframe(hist_df, use_container_width=True)
+    data = sheet.get_all_records()
+    if len(data) > 0:
+        st.subheader("📜 Riwayat Prediksi (Google Sheet)")
+        df_hist = pd.DataFrame(data)
+        st.dataframe(df_hist, use_container_width=True)
     else:
-        st.info("Belum ada riwayat prediksi yang tersimpan.")
+        st.info("Belum ada data pada Google Sheet.")
+
+
 
 
 
