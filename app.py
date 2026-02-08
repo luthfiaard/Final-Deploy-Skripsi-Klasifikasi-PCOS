@@ -195,6 +195,7 @@ if pred_btn:
             row_data.append(user_input[feature])
 
         row_data.extend([
+            prediction,  # 1 = PCOS, 0 = Tidak PCOS
             "PCOS" if prediction == 1 else "Tidak PCOS",
             round(probabilities[1], 3),
             round(probabilities[0], 3)
@@ -223,6 +224,7 @@ if history_btn:
         st.dataframe(df_hist, use_container_width=True)
     else:
         st.info("Belum ada data pada Google Sheet.")
+
 
 
 
