@@ -190,17 +190,26 @@ if pred_btn:
             datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         ]
 
-        # urut sesuai selected_features
+        # pastikan SEMUA input jadi Python native
         for feature in selected_features:
-            row_data.append(user_input[feature])
+            val = user_input[feature]
+            if isinstance(val, float):
+                row_data.append(float(val))
+            else:
+                row_data.append(int(val))
+
+        # konversi hasil model
+        pred_int = int(prediction)
+        prob_pcos = float(probabilities[1])
+        prob_tidak_pcos = float(probabilities[0])
 
         row_data.extend([
-            prediction,  # 1 = PCOS, 0 = Tidak PCOS
-            "PCOS" if prediction == 1 else "Tidak PCOS",
-            round(probabilities[1], 3),
-            round(probabilities[0], 3)
+            pred_int,                                      # 0 / 1
+            "PCOS" if pred_int == 1 else "Tidak PCOS",     # label teks
+            round(prob_pcos, 3),
+            round(prob_tidak_pcos, 3)
         ])
-
+        
         sheet.append_row(row_data)
 
         # === Visualisasi probabilitas ===
@@ -224,6 +233,7 @@ if history_btn:
         st.dataframe(df_hist, use_container_width=True)
     else:
         st.info("Belum ada data pada Google Sheet.")
+
 
 
 
