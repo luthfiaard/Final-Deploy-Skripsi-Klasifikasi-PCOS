@@ -185,23 +185,22 @@ if pred_btn:
             )
         st.caption("⚠️ *Catatan: Sistem ini hanya berfungsi sebagai alat bantu prediksi, bukan diagnosis medis.*")
 
-        # === Simpan ke riwayat ===
         # === Simpan ke Google Sheet (Excel) ===
-row_data = [
-    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-]
+        row_data = [
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        ]
 
-# urut sesuai selected_features
-for feature in selected_features:
-    row_data.append(user_input[feature])
+        # urut sesuai selected_features
+        for feature in selected_features:
+            row_data.append(user_input[feature])
 
-row_data.extend([
-    "PCOS" if prediction == 1 else "Tidak PCOS",
-    round(probabilities[1], 3),
-    round(probabilities[0], 3)
-])
+        row_data.extend([
+            "PCOS" if prediction == 1 else "Tidak PCOS",
+            round(probabilities[1], 3),
+            round(probabilities[0], 3)
+        ])
 
-sheet.append_row(row_data)
+        sheet.append_row(row_data)
 
         # === Visualisasi probabilitas ===
         st.subheader("📊 Visualisasi Probabilitas")
@@ -224,6 +223,7 @@ if history_btn:
         st.dataframe(df_hist, use_container_width=True)
     else:
         st.info("Belum ada data pada Google Sheet.")
+
 
 
 
