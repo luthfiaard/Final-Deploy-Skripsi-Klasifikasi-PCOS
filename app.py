@@ -218,11 +218,12 @@ if pred_btn:
 if history_btn:
     data = sheet.get_all_records()
     if len(data) > 0:
-        st.subheader("📜 Riwayat Prediksi (Google Sheet)")
+        st.subheader("📜 Riwayat Prediksi")
         df_hist = pd.DataFrame(data)
         st.dataframe(df_hist, use_container_width=True)
     else:
         st.info("Belum ada data pada Google Sheet.")
+
 
 
 
