@@ -101,7 +101,7 @@ with col1:
 with col2:
     reset_btn = st.button("🔁 Reset Hasil")
 with col3:
-    history_btn = st.button("📊 Lihat Riwayat Prediksi (jika ada)")
+    history_btn = st.button("📊 Lihat Riwayat Prediksi")
 
 # === Reset Form ===
 if reset_btn:
@@ -227,6 +227,7 @@ if history_btn:
         st.dataframe(df_hist, use_container_width=True)
     else:
         st.info("Belum ada data pada Google Sheet.")
+
 
 
 
